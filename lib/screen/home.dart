@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        transaction.amount.toString(),
+                        '\$${transaction.amount}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
