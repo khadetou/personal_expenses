@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "../models/transaction.dart";
+import "package:intl/intl.dart";
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         Text(
-                          transaction.date.toString(),
+                          DateFormat.yMMMMd().format(transaction.date),
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.black45,
