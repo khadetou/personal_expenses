@@ -7,21 +7,24 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Personal Expenses"),
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: const Text("Personal Expenses"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
+          children: const <Widget>[
+            SizedBox(
               width: double.infinity,
-              child: const Card(
+              child: Card(
                 child: Text('CHART'),
                 elevation: 5,
               ),
             ),
             UserTransaction()
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
