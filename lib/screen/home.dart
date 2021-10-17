@@ -12,7 +12,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
     Transaction(
       id: "t1",
-      title: "New shoes",
+      title: "New Shoes",
       amount: 69.99,
       date: DateTime.now(),
     ),
@@ -50,19 +50,38 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2,
                         ),
                       ),
                       padding: const EdgeInsets.all(10),
                       child: Text(
                         transaction.amount.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
                       ),
                     ),
-                    Column(children: <Widget>[
-                      Text(transaction.title),
-                      Text(transaction.date.toString()),
-                    ])
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          transaction.title,
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          transaction.date.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ));
               }).toList(),
