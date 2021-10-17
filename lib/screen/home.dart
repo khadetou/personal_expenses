@@ -24,6 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
     ),
   ];
+
+  // String? titleInput;
+  // String? amountInput;
+  final titleInputController = TextEditingController();
+  final amountInputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,18 +53,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      decoration: const InputDecoration(
                         labelText: "Title",
                       ),
+                      // onChanged: (value) {
+                      //   titleInput = value;
+                      // },
+                      controller: titleInputController,
                     ),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      decoration: const InputDecoration(
                         labelText: "Amount",
                       ),
+                      // onChanged: (val) {
+                      //   amountInput = val;
+                      // },
+                      controller: amountInputController,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleInputController.text);
+                        print(amountInputController.text);
+                      },
                       child: const Text(
                         "Add Transaction",
                         style: TextStyle(
