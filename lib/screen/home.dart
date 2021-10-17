@@ -31,13 +31,44 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text("Personal Expenses"),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Card(
-              child: SizedBox(
-                child: Text('First card'),
-                width: 100,
+            Container(
+              width: double.infinity,
+              child: const Card(
+                child: Text('CHART'),
+                elevation: 5,
               ),
-              elevation: 10,
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    const TextField(
+                      decoration: InputDecoration(
+                        labelText: "Title",
+                      ),
+                    ),
+                    const TextField(
+                      decoration: InputDecoration(
+                        labelText: "Amount",
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Add Transaction",
+                        style: TextStyle(
+                          color: Colors.purple,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
             Column(
               children: transactions.map((transaction) {
