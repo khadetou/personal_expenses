@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: "Personal Expenses",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.purple,
+        primarySwatch: Colors.purple,
       ),
       home: const MyHomePage(),
     );
