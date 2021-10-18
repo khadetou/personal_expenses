@@ -42,21 +42,48 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => submitData(),
             ),
             TextField(
-                decoration: const InputDecoration(
-                  labelText: "Amount",
-                ),
-                controller: amountInputController,
-                keyboardType: TextInputType.number,
-                onSubmitted: (_) => submitData()),
-            TextButton(
-              onPressed: submitData,
-              child: Text(
-                "Add Transaction",
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                ),
+              decoration: const InputDecoration(
+                labelText: "Amount",
               ),
-            )
+              controller: amountInputController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
+            ),
+            SizedBox(
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const Text(
+                    "No Date Chosen",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Choose date",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            TextButton(
+                onPressed: submitData,
+                child: const Text(
+                  "Add Transaction",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                    Theme.of(context).primaryColor,
+                  ),
+                ))
           ],
         ),
       ),
