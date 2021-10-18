@@ -77,13 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const SizedBox(
-              width: double.infinity,
-              child: Card(
-                child: Text('CHART'),
-                elevation: 5,
-              ),
-            ),
             Chart(recentTransaction: _recentTransaction),
             TransactionList(transactions: _userTransactions)
           ],
