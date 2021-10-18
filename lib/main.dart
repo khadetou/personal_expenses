@@ -17,6 +17,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        fontFamily: "Quicksand",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText2: const TextStyle(
+                fontFamily: "OpenSans",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              headline6: const TextStyle(
+                fontFamily: "Quicksand",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
       ),
       home: const MyHomePage(),
     );
