@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:intl/intl.dart";
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -10,19 +11,35 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleInputController = TextEditingController();
+  final _titleInputController = TextEditingController();
+  final _amountInputController = TextEditingController();
+  late DateTime _selectedDate;
 
-  final amountInputController = TextEditingController();
-
-  void submitData() {
-    final enteredTitle = titleInputController.text;
-    final enteredAmount = double.parse(amountInputController.text);
+  void _submitData() {
+    final enteredTitle = _titleInputController.text;
+    final enteredAmount = double.parse(_amountInputController.text);
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
 
     widget.addTx(enteredTitle, enteredAmount);
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -38,28 +55,30 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: const InputDecoration(
                 labelText: "Title",
               ),
-              controller: titleInputController,
-              onSubmitted: (_) => submitData(),
+              controller: _titleInputController,
+              onSubmitted: (_) => _submitData(),
             ),
             TextField(
               decoration: const InputDecoration(
                 labelText: "Amount",
               ),
-              controller: amountInputController,
+              controller: _amountInputController,
               keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => _submitData(),
             ),
             SizedBox(
               height: 100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text(
-                    "No Date Chosen",
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  Text(
+                    _selectedDate == null
+                        ? "No Date Chosen"
+                        : "Picked date: ${DateFormat.yMd().format(_selectedDate)}",
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: _presentDatePicker,
                     child: const Text(
                       "Choose date",
                       style:
@@ -70,20 +89,21 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
             ),
             TextButton(
-                onPressed: submitData,
-                child: const Text(
-                  "Add Transaction",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+              onPressed: _submitData,
+              child: const Text(
+                "Add Transaction",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).primaryColor,
-                  ),
-                ))
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+            )
           ],
         ),
       ),
