@@ -71,7 +71,8 @@ class _NewTransactionState extends State<NewTransaction> {
                 labelText: "Amount",
               ),
               controller: _amountInputController,
-              keyboardType: TextInputType.number,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => _submitData(),
             ),
             SizedBox(
@@ -83,7 +84,10 @@ class _NewTransactionState extends State<NewTransaction> {
                     _selectedDate == null
                         ? "No Date Chosen"
                         : "Picked date: ${DateFormat.yMd().format(_selectedDate as DateTime)}",
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
                   ),
                   TextButton(
                     onPressed: _presentDatePicker,
