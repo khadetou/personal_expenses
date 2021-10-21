@@ -72,6 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     var appBar2 = AppBar(
       title: const Text("Personal Expenses"),
       actions: <Widget>[
@@ -81,42 +83,52 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ],
     );
+    final txSizedBox = SizedBox(
+      height: (MediaQuery.of(context).size.height * 0.65) -
+          appBar2.preferredSize.height -
+          MediaQuery.of(context).padding.top,
+      child: TransactionList(
+        transactions: _userTransactions,
+        deleteTransaction: _deleteTransaction,
+      ),
+    );
     return Scaffold(
       appBar: appBar2,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Show Chart"),
-                Switch(
-                  value: _showCharts,
-                  onChanged: (val) {
-                    setState(() {
-                      _showCharts = val;
-                    });
-                  },
-                ),
-              ],
-            ),
-            _showCharts
-                ? SizedBox(
-                    height: (MediaQuery.of(context).size.height * 0.7) -
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Show Chart"),
+                  Switch(
+                    value: _showCharts,
+                    onChanged: (val) {
+                      setState(() {
+                        _showCharts = val;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            isLandscape
+                ? (_showCharts
+                    ? SizedBox(
+                        height: (MediaQuery.of(context).size.height * 0.7) -
+                            appBar2.preferredSize.height -
+                            MediaQuery.of(context).padding.top,
+                        child: Chart(recentTransaction: _recentTransaction),
+                      )
+                    : txSizedBox)
+                : SizedBox(
+                    height: (MediaQuery.of(context).size.height * 0.35) -
                         appBar2.preferredSize.height -
                         MediaQuery.of(context).padding.top,
                     child: Chart(recentTransaction: _recentTransaction),
-                  )
-                : SizedBox(
-                    height: (MediaQuery.of(context).size.height * 0.65) -
-                        appBar2.preferredSize.height -
-                        MediaQuery.of(context).padding.top,
-                    child: TransactionList(
-                      transactions: _userTransactions,
-                      deleteTransaction: _deleteTransaction,
-                    ),
-                  )
+                  ),
+            if (!isLandscape) txSizedBox
           ],
         ),
       ),
