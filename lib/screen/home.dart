@@ -68,6 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool _showCharts = false;
+
   @override
   Widget build(BuildContext context) {
     var appBar2 = AppBar(
@@ -85,21 +87,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: (MediaQuery.of(context).size.height * 0.35) -
-                  appBar2.preferredSize.height -
-                  MediaQuery.of(context).padding.top,
-              child: Chart(recentTransaction: _recentTransaction),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Show Chart"),
+                Switch(
+                  value: _showCharts,
+                  onChanged: (val) {
+                    setState(() {
+                      _showCharts = val;
+                    });
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: (MediaQuery.of(context).size.height * 0.65) -
-                  appBar2.preferredSize.height -
-                  MediaQuery.of(context).padding.top,
-              child: TransactionList(
-                transactions: _userTransactions,
-                deleteTransaction: _deleteTransaction,
-              ),
-            )
+            _showCharts
+                ? SizedBox(
+                    height: (MediaQuery.of(context).size.height * 0.35) -
+                        appBar2.preferredSize.height -
+                        MediaQuery.of(context).padding.top,
+                    child: Chart(recentTransaction: _recentTransaction),
+                  )
+                : SizedBox(
+                    height: (MediaQuery.of(context).size.height * 0.65) -
+                        appBar2.preferredSize.height -
+                        MediaQuery.of(context).padding.top,
+                    child: TransactionList(
+                      transactions: _userTransactions,
+                      deleteTransaction: _deleteTransaction,
+                    ),
+                  )
           ],
         ),
       ),

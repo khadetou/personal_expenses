@@ -1,7 +1,14 @@
 import "package:flutter/material.dart";
 import 'package:personal_expenses/screen/home.dart';
+// import "package:flutter/services.dart"; //To not desactivate the landscape mode
 
 void main() {
+  /**These towe first lines of code allow us to disable the landscape mode. 
+   *   WidgetsFlutterBinding.ensureInitialized();
+   *   SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+   */
+
   return runApp(
     const MyApp(),
   );
